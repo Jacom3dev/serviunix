@@ -1,0 +1,23 @@
+{
+    "name": "josejulian/mvc-app",
+    "autoload": {
+      "psr-4": {
+        "App\\Controllers\\": "controller/",
+        "App\\Models\\": "models/",
+        "App\\Routes\\": "routes/",
+        "App\\Helpers\\": "helpers/",
+        "App\\Core\\": "core/"
+      }
+    },
+    "authors": [
+      {
+        "name": "José Julián Jácome Martínez"
+      }
+    ],
+    "require": {
+      "illuminate/database": "^11.34",
+      "illuminate/http": "^11.34",
+        "illuminate/support": "^11.34",
+        "laravel/serializable-closure": "^2.0"
+    }
+  }

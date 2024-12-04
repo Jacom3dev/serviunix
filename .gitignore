@@ -1,0 +1,23 @@
+# Ignore vendor folder (Composer dependencies)
+/vendor/
+
+# Ignore Composer lock file
+composer.lock
+
+# Ignore environment variables
+.env
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+
+# Ignore IDE settings
+.vscode/
+.idea/
+
+# Ignore Composer's phar file
+composer.phar
+php_error_log
