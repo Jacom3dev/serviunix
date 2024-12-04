@@ -1,13 +1,24 @@
 <?php
+header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header("Access-Control-Allow-Credentials: true");
+header("Content-Type: application/json; charset=utf-8");
 
 use App\Controllers\EmployeeController;
 use App\Controllers\GenderController;
 use App\Controllers\DepartmentController;
 
+$employeeController = new EmployeeController();
+$genderController = new GenderController();
+$departmentController = new DepartmentController();
+
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $uri = trim($_SERVER['REQUEST_URI'], '/');
 
 $data = [];
+
+
 
 if ($requestMethod === 'POST' || $requestMethod === 'PUT') {
     $inputData = file_get_contents("php://input");
@@ -17,11 +28,12 @@ if ($requestMethod === 'POST' || $requestMethod === 'PUT') {
     }
 }
 
-$employeeController = new EmployeeController();
-$genderController = new GenderController();
-$departmentController = new DepartmentController();
-
 $uriFound = false;
+
+if ($requestMethod == "OPTIONS") {
+    http_response_code(200);
+    return;
+}
 
 switch ($requestMethod) {
     case 'POST':
@@ -56,7 +68,7 @@ switch ($requestMethod) {
         break;
         
     case 'DELETE':
-        if (preg_match('/^serviunix\/employees\/(\d+)$/', $uri, $matches)) {
+        if (preg_match('/^serviunix\/employee\/(\d+)$/', $uri, $matches)) {
             $employeeId = $matches[1];
             $employeeController->deleteEmployee($employeeId);
             $uriFound = true;
